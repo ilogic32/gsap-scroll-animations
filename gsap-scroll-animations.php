@@ -3,7 +3,7 @@
  * Plugin Name: GSAP Scroll Animations
  * Plugin URI: www.blu8print.com
  * Description: Simple GSAP scroll animations by HTML ID with accessibility support
- * Version: 1.1.4
+ * Version: 1.1.5
  * Requires at least: 5.0
  * Requires PHP: 7.4
  * Tested up to: 6.7
@@ -984,7 +984,7 @@ class GSAP_Scroll_Animations {
                                 <div>
                                     <div style="font-weight: 600; color: #353f6d; margin-bottom: 8px; font-size: 15px;">📈 Easing</div>
                                     <p style="margin: 0; color: #555; line-height: 1.6; font-size: 14px;">
-                                        Controls the animation's acceleration curve. <strong>Power1 Out</strong> is great for beginners—smooth start, gentle end. Try <strong>Back Out</strong> for a playful bounce effect!
+                                        Controls the animation's acceleration curve. <strong>Power1 Out</strong> provides a natural, smooth motion ideal for most use cases. <strong>Back Out</strong> creates a slight overshoot effect for emphasis.
                                     </p>
                                 </div>
                             </div>
