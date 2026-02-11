@@ -13,6 +13,11 @@ if ( !class_exists('Parsedown', false) ) {
 	require __DIR__ . '/Puc/v5p6/Parsedown.php';
 }
 
+// Load PucReadmeParser for parsing readme files
+if ( !class_exists('PucReadmeParser', false) ) {
+	require __DIR__ . '/vendor/PucReadmeParser.php';
+}
+
 require __DIR__ . '/Puc/v5p6/PucFactory.php';
 require __DIR__ . '/Puc/v5/PucFactory.php';
 

@@ -1,19 +1,19 @@
 {
   "name": "GSAP Scroll Animations",
   "slug": "gsap-scroll-animations",
-  "version": "1.1.3",
-  "download_url": "https://blu8print.com/plugin-updates/gsap-animations/gsap-scroll-animations-1.1.3.zip",
+  "version": "1.1.4",
+  "download_url": "https://blu8print.com/plugin-updates/gsap-animations/gsap-scroll-animations-1.1.4.zip",
   "homepage": "https://www.blu8print.com",
   "requires": "5.0",
   "tested": "6.7",
   "requires_php": "7.4",
-  "last_updated": "2026-02-11 16:00:00",
+  "last_updated": "2026-02-11 16:15:00",
   "author": "Blueprint 8",
   "author_homepage": "https://www.blu8print.com",
   "sections": {
     "description": "Simple, beginner-friendly GSAP scroll animations for WordPress. Add animations to any element using HTML IDs with an easy admin interface. Features 13 animation types, timing controls, and accessibility support with prefers-reduced-motion detection. Advanced users can still use class-based animations.",
     "installation": "Upload the plugin folder to /wp-content/plugins/ and activate through the WordPress Plugins menu.",
-    "changelog": "<h4>1.1.3</h4><ul><li>Fixed Parsedown autoloading in plugin update checker</li><li>Added explicit require for Parsedown library</li><li>Completely resolved 'Class Parsedown not found' error</li></ul><h4>1.1.2</h4><ul><li>Fixed missing Parsedown dependency for GitHub release notes</li><li>Resolved 'Class Parsedown not found' error</li><li>Plugin update checker now works correctly</li></ul><h4>1.1.1</h4><ul><li>Added WordPress and PHP version requirements to plugin header</li><li>Updated tested up to WordPress 6.7</li><li>Added License URI for better compatibility</li></ul><h4>1.1.0</h4><ul><li>Simplified admin UI focused on HTML ID-based animations</li><li>Added comprehensive 'How to Use' guide with Blueprint8 branding</li><li>Improved beginner-friendly documentation and examples</li><li>Removed class-based documentation from UI (functionality still available)</li><li>Enhanced visual design with step-by-step instructions</li></ul><h4>1.0.0</h4><ul><li>Initial release with dual animation systems</li><li>ID-based animation system with admin UI (13 types)</li><li>Class-based animation system for developers (20+ effects)</li><li>Accessibility support with prefers-reduced-motion detection</li><li>Conditional GSAP loading for performance</li></ul>"
+    "changelog": "<h4>1.1.4</h4><ul><li>Added PucReadmeParser library for readme file parsing</li><li>Fixed 'Class PucReadmeParser not found' error</li><li>Created vendor directory with all required dependencies</li><li>Update system fully functional</li></ul><h4>1.1.3</h4><ul><li>Fixed Parsedown autoloading in plugin update checker</li><li>Added explicit require for Parsedown library</li><li>Completely resolved 'Class Parsedown not found' error</li></ul><h4>1.1.2</h4><ul><li>Fixed missing Parsedown dependency for GitHub release notes</li><li>Resolved 'Class Parsedown not found' error</li><li>Plugin update checker now works correctly</li></ul><h4>1.1.1</h4><ul><li>Added WordPress and PHP version requirements to plugin header</li><li>Updated tested up to WordPress 6.7</li><li>Added License URI for better compatibility</li></ul><h4>1.1.0</h4><ul><li>Simplified admin UI focused on HTML ID-based animations</li><li>Added comprehensive 'How to Use' guide with Blueprint8 branding</li><li>Improved beginner-friendly documentation and examples</li><li>Removed class-based documentation from UI (functionality still available)</li><li>Enhanced visual design with step-by-step instructions</li></ul><h4>1.0.0</h4><ul><li>Initial release with dual animation systems</li><li>ID-based animation system with admin UI (13 types)</li><li>Class-based animation system for developers (20+ effects)</li><li>Accessibility support with prefers-reduced-motion detection</li><li>Conditional GSAP loading for performance</li></ul>"
   },
-  "upgrade_notice": "Version 1.1.3 completely fixes the update checker error. Update recommended for all users experiencing issues."
+  "upgrade_notice": "Version 1.1.4 adds all missing dependencies. Final fix for update checker errors."
 }
