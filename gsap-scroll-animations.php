@@ -21,15 +21,18 @@ if (!defined('ABSPATH')) {
 require __DIR__ . '/lib/plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
-// Initialize update checker
+// Initialize update checker - Using GitHub releases
 $gsapUpdateChecker = PucFactory::buildUpdateChecker(
-    'https://blu8print.com/plugin-updates/gsap-animations/update-info.json',
+    'https://github.com/ilogic32/gsap-scroll-animations/',
     __FILE__,
     'gsap-scroll-animations'
 );
 
 // Optional: Enable update checker debug mode (uncomment to enable)
 // $gsapUpdateChecker->debugMode = true;
+
+// Set the branch to check for updates (optional, defaults to 'main')
+$gsapUpdateChecker->setBranch('main');
 // ============================================
 
 class GSAP_Scroll_Animations {
