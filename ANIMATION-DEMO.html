@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Scroll Animations - Live Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ========================
+           ANIMATION STYLES
+           ======================== */
+
+        /* Parallax Effects */
+        .gsap-parallax {
+            will-change: transform;
+        }
+
+        /* Fade Effects */
+        .gsap-fade-up,
+        .gsap-fade-left,
+        .gsap-fade-right,
+        .gsap-fade-down,
+        .gsap-fade,
+        .gsap-scale {
+            opacity: 0;
+        }
+
+        /* Transform Effects */
+        .gsap-horizontal {
+            will-change: transform;
+        }
+
+        .gsap-pin {
+            position: relative;
+        }
+
+        .gsap-stagger > * {
+            opacity: 0;
+        }
+
+        .gsap-text-reveal {
+            overflow: hidden;
+        }
+
+        .gsap-text-reveal > * {
+            transform: translateY(100%);
+        }
+
+        .gsap-rotate,
+        .gsap-diagonal {
+            will-change: transform;
+        }
+
+        /* 3D Flip */
+        .gsap-flip {
+            will-change: transform;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .gsap-mobile-disable {
+                transform: none !important;
+            }
+        }
+
+        /* ========================
+           PAGE STYLES
+           ======================== */
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .header .scroll-hint {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 50px;
+            padding: 40px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .demo-item {
+            text-align: center;
+        }
+
+        .demo-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .demo-box img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+        }
+
+        .demo-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .divider {
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(102, 126, 234, 0.1), transparent);
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .feature-box {
+            background: #f9f9f9;
+            padding: 30px;
+            border-left: 4px solid #667eea;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .feature-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .counter-box {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            border-radius: 15px;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .footer h3 {
+            margin-bottom: 10px;
+        }
+
+        .spacer {
+            height: 60px;
+        }
+
+        .stagger-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .text-reveal-item {
+            font-size: 1.2em;
+            font-weight: 500;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-box {
+                min-height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>🎨 GSAP Scroll Animations</h1>
+    <p>Live Demo - Scroll down to see all animations in action</p>
+    <div class="scroll-hint">⬇️ Scroll to explore ⬇️</div>
+</div>
+
+<div class="container">
+
+    <!-- ========================================
+         PARALLAX EFFECTS
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">🎯 Parallax Effects (3 Animations)</div>
+
+        <div class="feature-box">
+            <h3>Vertical Parallax</h3>
+            <p>Scroll down - the image moves slower than your scroll speed</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <!-- Vertical parallax -->
+                <div class="gsap-parallax" data-speed="-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold;">
+                    Parallax -5
+                </div>
+                <div class="demo-label">Speed: -5 (moves slower)</div>
+            </div>
+
+            <div class="demo-item">
+                <!-- Different parallax speed -->
+                <div class="gsap-parallax" data-speed="-10" style="background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%); height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold;">
+                    Parallax -10
+                </div>
+                <div class="demo-label">Speed: -10 (faster parallax)</div>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="feature-box">
+            <h3>Horizontal Parallax</h3>
+            <p>Scroll down - the element moves horizontally</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item" style="grid-column: 1 / -1;">
+                <!-- Horizontal parallax -->
+                <div class="gsap-horizontal" data-hspeed="50" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em; font-weight: bold;">
+                    Horizontal Movement →
+                </div>
+                <div class="demo-label">Moves right as you scroll</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         FADE ANIMATIONS
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">✨ Fade Animations (5 Animations)</div>
+
+        <div class="feature-box">
+            <h3>Fade Up (From Bottom)</h3>
+            <p>Scroll down - content fades in while moving upward</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <!-- Fade up -->
+                <div class="gsap-fade-up" data-distance="100" data-duration="1.2">
+                    <div class="demo-box">
+                        ⬆️ Fade Up<br>Distance: 100px
+                    </div>
+                </div>
+                <div class="demo-label">Fades in from bottom</div>
+            </div>
+
+            <div class="demo-item">
+                <!-- Fade down -->
+                <div class="gsap-fade-down" data-distance="80">
+                    <div class="demo-box">
+                        ⬇️ Fade Down<br>Distance: 80px
+                    </div>
+                </div>
+                <div class="demo-label">Fades in from top</div>
+            </div>
+
+            <div class="demo-item">
+                <!-- Fade left -->
+                <div class="gsap-fade-left" data-distance="100">
+                    <div class="demo-box">
+                        ← Fade Left<br>Distance: 100px
+                    </div>
+                </div>
+                <div class="demo-label">Fades in from right</div>
+            </div>
+
+            <div class="demo-item">
+                <!-- Fade right -->
+                <div class="gsap-fade-right" data-distance="100">
+                    <div class="demo-box">
+                        → Fade Right<br>Distance: 100px
+                    </div>
+                </div>
+                <div class="demo-label">Fades in from left</div>
+            </div>
+
+            <div class="demo-item">
+                <!-- Simple fade -->
+                <div class="gsap-fade" data-duration="1.5">
+                    <div class="demo-box">
+                        ✨ Simple Fade<br>(No movement)
+                    </div>
+                </div>
+                <div class="demo-label">Fades without movement</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         SCALE & ZOOM
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">🔍 Scale & Zoom Effects (2 Animations)</div>
+
+        <div class="feature-box">
+            <h3>Scale In</h3>
+            <p>Content grows from smaller size while fading in</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <!-- Scale in -->
+                <div class="gsap-scale" data-scale="0.8" data-duration="1">
+                    <div class="demo-box">
+                        📈 Scale In<br>From 80% to 100%
+                    </div>
+                </div>
+                <div class="demo-label">Grows while fading in</div>
+            </div>
+
+            <div class="demo-item">
+                <!-- Scale in different -->
+                <div class="gsap-scale" data-scale="0.5" data-duration="1.2">
+                    <div class="demo-box">
+                        📊 Scale In<br>From 50% to 100%
+                    </div>
+                </div>
+                <div class="demo-label">Bigger scale animation</div>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="feature-box">
+            <h3>Zoom On Scroll</h3>
+            <p>Continuously zooms as you scroll past</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item" style="grid-column: 1 / -1;">
+                <!-- Zoom -->
+                <div class="gsap-zoom" data-scale="1.3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold;">
+                    🔎 Zoom In<br>Scroll to zoom
+                </div>
+                <div class="demo-label">Zooms from 1x to 1.3x</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         ROTATION & FLIP
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">🔄 Rotation & Flip (2 Animations)</div>
+
+        <div class="feature-box">
+            <h3>Rotate On Scroll</h3>
+            <p>Element continuously rotates as you scroll</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <!-- Rotate -->
+                <div class="gsap-rotate" data-rotate="360" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold;">
+                    🔄 360°
+                </div>
+                <div class="demo-label">Full rotation</div>
+            </div>
+
+            <div class="demo-item">
+                <!-- Flip -->
+                <div class="gsap-flip" data-flip="90" data-duration="1.2" style="background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%); height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold;">
+                    💫 3D Flip
+                </div>
+                <div class="demo-label">3D flip animation</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         STAGGER
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">⚡ Stagger Animation</div>
+
+        <div class="feature-box">
+            <h3>Stagger Children</h3>
+            <p>Each child animates one after another</p>
+        </div>
+
+        <div class="gsap-stagger" data-stagger="0.15" data-distance="30">
+            <div class="stagger-item">✨ Item 1 - Appears first</div>
+            <div class="stagger-item">✨ Item 2 - Appears second</div>
+            <div class="stagger-item">✨ Item 3 - Appears third</div>
+            <div class="stagger-item">✨ Item 4 - Appears last</div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         TEXT REVEAL
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">📝 Text Reveal</div>
+
+        <div class="feature-box">
+            <h3>Text Reveals Line by Line</h3>
+            <p>Each heading and paragraph reveals separately</p>
+        </div>
+
+        <div class="gsap-text-reveal">
+            <h2 class="text-reveal-item">This is a heading that reveals</h2>
+            <p class="text-reveal-item">This paragraph reveals with animation</p>
+            <p class="text-reveal-item">Each element animates individually</p>
+            <h3 class="text-reveal-item">Another heading appears here</h3>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         COUNTER
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">🔢 Animated Counter</div>
+
+        <div class="feature-box">
+            <h3>Numbers Count Up On Scroll</h3>
+            <p>When you scroll these numbers into view, they count from 0 to target</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Happy Customers</div>
+                <div class="gsap-counter" data-target="1000" data-duration="2" style="font-size: 3em; font-weight: bold; color: #667eea;">0</div>
+                <div class="demo-label">Counts to 1000</div>
+            </div>
+
+            <div class="demo-item">
+                <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Projects Completed</div>
+                <div class="gsap-counter" data-target="500" data-duration="2" style="font-size: 3em; font-weight: bold; color: #667eea;">0</div>
+                <div class="demo-label">Counts to 500</div>
+            </div>
+
+            <div class="demo-item">
+                <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Team Members</div>
+                <div class="gsap-counter" data-target="50" data-duration="1.5" style="font-size: 3em; font-weight: bold; color: #667eea;">0</div>
+                <div class="demo-label">Counts to 50</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         PROGRESS BAR
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">📊 Progress Bar</div>
+
+        <div class="feature-box">
+            <h3>Progress Bars Fill On Scroll</h3>
+            <p>When scrolled into view, progress bars animate to their target width</p>
+        </div>
+
+        <div style="margin: 30px 0;">
+            <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 8px; font-weight: 500;">Project A - 75%</div>
+                <div class="progress-bar-container">
+                    <div class="gsap-progress" data-percent="75" data-duration="1.5" style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: 0%;"></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 8px; font-weight: 500;">Project B - 90%</div>
+                <div class="progress-bar-container">
+                    <div class="gsap-progress" data-percent="90" data-duration="1.5" style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: 0%;"></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 8px; font-weight: 500;">Project C - 100%</div>
+                <div class="progress-bar-container">
+                    <div class="gsap-progress" data-percent="100" data-duration="1.5" style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ More animations below ↓</div>
+
+    <!-- ========================================
+         SKEW & BLUR
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">🌀 Advanced Effects (Skew & Blur)</div>
+
+        <div class="feature-box">
+            <h3>Skew On Scroll</h3>
+            <p>Element skews based on your scroll velocity (scroll fast to see more skew)</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item" style="grid-column: 1 / -1;">
+                <div class="gsap-skew" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold;">
+                    🌀 Scroll fast!
+                </div>
+                <div class="demo-label">Skews based on scroll speed</div>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="feature-box">
+            <h3>Blur On Scroll</h3>
+            <p>Element blurs as you scroll past it</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item" style="grid-column: 1 / -1;">
+                <div class="gsap-blur" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; font-weight: bold;">
+                    👀 Gets blurry
+                </div>
+                <div class="demo-label">Blur effect on scroll</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="divider">↓ See more below ↓</div>
+
+    <!-- ========================================
+         PINNING
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">📌 Pinning Effects</div>
+
+        <div class="feature-box">
+            <h3>Pin Section</h3>
+            <p>This section will stay in view as you scroll past it</p>
+        </div>
+
+        <div class="gsap-pin" data-pinstart="top top" data-pinend="bottom top" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 8px; text-align: center; margin-bottom: 30px;">
+            <h3 style="font-size: 1.8em; margin-bottom: 10px;">📌 This Section is PINNED</h3>
+            <p>Keep scrolling - this stays visible!</p>
+            <p style="margin-top: 10px; opacity: 0.9; font-size: 0.9em;">When you scroll past it, the next section will push it out</p>
+        </div>
+
+        <div style="background: #f0f0f0; padding: 30px; border-radius: 8px; margin-bottom: 30px;">
+            <h4 style="margin-bottom: 15px;">Background content while pinned:</h4>
+            <p style="margin-bottom: 10px;">Keep scrolling to see the pinned section stay in place...</p>
+            <p style="margin-bottom: 10px;">The pin effect creates a great storytelling experience</p>
+            <p>You can use this to highlight important information</p>
+        </div>
+
+    </div>
+
+    <div class="divider">✅ End of demo ✅</div>
+
+    <!-- ========================================
+         SUMMARY
+         ======================================== -->
+    <div class="section">
+        <div class="section-title">🎯 Summary</div>
+
+        <div class="feature-box">
+            <h3>✨ All Animations Demonstrated!</h3>
+            <p>You've seen all major animation types:</p>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li>✅ Parallax Effects (3 types)</li>
+                <li>✅ Fade Animations (5 types)</li>
+                <li>✅ Scale & Zoom (2 types)</li>
+                <li>✅ Rotation & Flip (2 types)</li>
+                <li>✅ Stagger Animation</li>
+                <li>✅ Text Reveal</li>
+                <li>✅ Animated Counter</li>
+                <li>✅ Progress Bars</li>
+                <li>✅ Skew Effect</li>
+                <li>✅ Blur Effect</li>
+                <li>✅ Pinning</li>
+            </ul>
+        </div>
+
+        <div class="feature-box" style="border-left-color: #4caf50; margin-top: 20px;">
+            <h3 style="color: #4caf50;">🚀 Ready to Use!</h3>
+            <p>All these animations are ready to use in your WordPress plugin:</p>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li>Copy any HTML element from this demo</li>
+                <li>Paste it into your WordPress page</li>
+                <li>Enable the class-based system in Settings → GSAP Animations</li>
+                <li>Customize with data attributes (duration, delay, distance, etc.)</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <h3>GSAP Scroll Animations - Live Demo Complete!</h3>
+    <p>All animations work perfectly with the WordPress plugin</p>
+    <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">This demo uses GSAP 3.12.5 and ScrollTrigger | Visit Settings → GSAP Animations in WordPress</p>
+</div>
+
+<!-- GSAP LIBRARY FROM CDN -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<!-- ANIMATION INITIALIZATION SCRIPT -->
+<script>
+    // Wait for DOM and GSAP to load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Exit if GSAP not loaded or user prefers reduced motion
+        if (typeof gsap === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            console.log('GSAP animations disabled');
+            return;
+        }
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ============================================
+        // PARALLAX EFFECTS
+        // ============================================
+
+        // Vertical parallax
+        gsap.utils.toArray('.gsap-parallax').forEach((elem) => {
+            const speed = elem.dataset.speed || -5;
+            gsap.to(elem, {
+                yPercent: speed * 10,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        });
+
+        // Horizontal parallax
+        gsap.utils.toArray('.gsap-horizontal').forEach((elem) => {
+            const speed = elem.dataset.hspeed || 50;
+            gsap.to(elem, {
+                xPercent: speed,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        });
+
+        // Diagonal movement
+        gsap.utils.toArray('.gsap-diagonal').forEach((elem) => {
+            const vSpeed = elem.dataset.speed || -5;
+            const hSpeed = elem.dataset.hspeed || 5;
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+
+            tl.to(elem, {
+                yPercent: vSpeed * 10,
+                xPercent: hSpeed * 10,
+                ease: 'none'
+            });
+        });
+
+        // ============================================
+        // FADE ANIMATIONS
+        // ============================================
+
+        // Fade in from bottom
+        gsap.utils.toArray('.gsap-fade-up').forEach((elem) => {
+            gsap.fromTo(elem,
+                { y: elem.dataset.distance || 60, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: elem.dataset.duration || 1,
+                    delay: elem.dataset.delay || 0,
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: elem.dataset.start || 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Fade in from top
+        gsap.utils.toArray('.gsap-fade-down').forEach((elem) => {
+            gsap.fromTo(elem,
+                { y: -(elem.dataset.distance || 60), opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: elem.dataset.duration || 1,
+                    delay: elem.dataset.delay || 0,
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: elem.dataset.start || 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Fade in from left
+        gsap.utils.toArray('.gsap-fade-left').forEach((elem) => {
+            gsap.fromTo(elem,
+                { x: -(elem.dataset.distance || 60), opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: elem.dataset.duration || 1,
+                    delay: elem.dataset.delay || 0,
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: elem.dataset.start || 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Fade in from right
+        gsap.utils.toArray('.gsap-fade-right').forEach((elem) => {
+            gsap.fromTo(elem,
+                { x: elem.dataset.distance || 60, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: elem.dataset.duration || 1,
+                    delay: elem.dataset.delay || 0,
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: elem.dataset.start || 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Simple fade
+        gsap.utils.toArray('.gsap-fade').forEach((elem) => {
+            gsap.fromTo(elem,
+                { opacity: 0 },
+                {
+                    opacity: 1,
+                    duration: elem.dataset.duration || 1.5,
+                    delay: elem.dataset.delay || 0,
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: elem.dataset.start || 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // ============================================
+        // SCALE & ZOOM EFFECTS
+        // ============================================
+
+        // Scale in
+        gsap.utils.toArray('.gsap-scale').forEach((elem) => {
+            gsap.fromTo(elem,
+                { scale: elem.dataset.scale || 0.8, opacity: 0 },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: elem.dataset.duration || 1,
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: elem.dataset.start || 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Zoom in on scroll
+        gsap.utils.toArray('.gsap-zoom').forEach((elem) => {
+            gsap.to(elem, {
+                scale: elem.dataset.scale || 1.2,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        });
+
+        // ============================================
+        // ROTATION EFFECTS
+        // ============================================
+
+        // Rotate on scroll
+        gsap.utils.toArray('.gsap-rotate').forEach((elem) => {
+            const rotation = elem.dataset.rotate || 360;
+            gsap.to(elem, {
+                rotation: rotation,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        });
+
+        // 3D flip
+        gsap.utils.toArray('.gsap-flip').forEach((elem) => {
+            gsap.from(elem, {
+                rotationY: elem.dataset.flip || 90,
+                opacity: 0,
+                duration: elem.dataset.duration || 1.2,
+                scrollTrigger: {
+                    trigger: elem,
+                    start: elem.dataset.start || 'top 80%'
+                }
+            });
+        });
+
+        // ============================================
+        // PINNING & STICKY
+        // ============================================
+
+        // Pin sections
+        gsap.utils.toArray('.gsap-pin').forEach((elem) => {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: elem.dataset.pinstart || 'top top',
+                end: elem.dataset.pinend || 'bottom top',
+                pin: true,
+                pinSpacing: elem.dataset.pinspacing !== 'false'
+            });
+        });
+
+        // Sticky with fade
+        gsap.utils.toArray('.gsap-sticky-fade').forEach((elem) => {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: 'top top',
+                end: 'bottom top',
+                pin: true,
+                pinSpacing: false,
+                onUpdate: self => {
+                    gsap.to(elem, {
+                        opacity: 1 - self.progress,
+                        duration: 0.1
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // ADVANCED EFFECTS
+        // ============================================
+
+        // Stagger children animations
+        gsap.utils.toArray('.gsap-stagger').forEach((elem) => {
+            const children = gsap.utils.toArray(elem.children);
+
+            gsap.set(children, {
+                opacity: 0,
+                y: elem.dataset.distance || 30
+            });
+
+            gsap.to(children, {
+                y: 0,
+                opacity: 1,
+                duration: elem.dataset.duration || 0.6,
+                stagger: elem.dataset.stagger || 0.1,
+                delay: elem.dataset.delay || 0,
+                scrollTrigger: {
+                    trigger: elem,
+                    start: elem.dataset.start || 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Text reveal
+        gsap.utils.toArray('.gsap-text-reveal').forEach((elem) => {
+            const lines = elem.querySelectorAll('.line, p, h1, h2, h3, h4, h5, h6');
+            gsap.from(lines, {
+                y: 100,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top 80%'
+                }
+            });
+        });
+
+        // Counter animation
+        gsap.utils.toArray('.gsap-counter').forEach((elem) => {
+            const target = elem.dataset.target || 100;
+            const duration = elem.dataset.duration || 2;
+            const obj = { value: 0 };
+
+            gsap.to(obj, {
+                value: target,
+                duration: duration,
+                ease: 'power1.inOut',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top 80%',
+                    once: true
+                },
+                onUpdate: () => {
+                    elem.textContent = Math.round(obj.value);
+                }
+            });
+        });
+
+        // Progress bar fill
+        gsap.utils.toArray('.gsap-progress').forEach((elem) => {
+            const percent = elem.dataset.percent || 100;
+            gsap.to(elem, {
+                width: percent + '%',
+                duration: elem.dataset.duration || 1.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top 85%'
+                }
+            });
+        });
+
+        // Skew on scroll
+        gsap.utils.toArray('.gsap-skew').forEach((elem) => {
+            let proxy = { skew: 0 };
+            gsap.to(proxy, {
+                skew: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    onUpdate: self => {
+                        let velocity = self.getVelocity();
+                        let skew = gsap.utils.clamp(-20, 20, velocity / -300);
+                        if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                            proxy.skew = skew;
+                            gsap.to(proxy, {
+                                skew: 0,
+                                duration: 0.8,
+                                ease: 'power3',
+                                overwrite: true,
+                                onUpdate: () => gsap.set(elem, { skewY: proxy.skew })
+                            });
+                        }
+                    }
+                }
+            });
+        });
+
+        // Blur on scroll
+        gsap.utils.toArray('.gsap-blur').forEach((elem) => {
+            gsap.to(elem, {
+                filter: 'blur(10px)',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        });
+
+        // ============================================
+        // MOBILE OPTIMIZATIONS
+        // ============================================
+
+        // Disable animations on mobile if needed
+        if (window.innerWidth <= 768) {
+            gsap.utils.toArray('.gsap-mobile-disable').forEach((elem) => {
+                ScrollTrigger.getAll().forEach(st => {
+                    if (st.trigger === elem) {
+                        st.kill();
+                    }
+                });
+            });
+        }
+
+        // Refresh on resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 250);
+        });
+
+        console.log('✅ All GSAP animations initialized!');
+    });
+</script>
+
+</body>
+</html>

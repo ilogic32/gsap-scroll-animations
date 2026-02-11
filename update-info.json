@@ -1,0 +1,19 @@
+{
+  "name": "GSAP Scroll Animations",
+  "slug": "gsap-scroll-animations",
+  "version": "1.0.0",
+  "download_url": "https://blu8print.com/plugin-updates/gsap-animations/gsap-scroll-animations-1.0.0.zip",
+  "homepage": "https://www.blu8print.com",
+  "requires": "5.0",
+  "tested": "6.6",
+  "requires_php": "7.4",
+  "last_updated": "2026-02-11 12:00:00",
+  "author": "Blueprint 8",
+  "author_homepage": "https://www.blu8print.com",
+  "sections": {
+    "description": "Two powerful animation systems: ID-based admin UI for non-technical users (13 animation types), and class-based system for developers with 20+ advanced animation effects. Includes accessibility support with prefers-reduced-motion detection.",
+    "installation": "Upload the plugin folder to /wp-content/plugins/ and activate through the WordPress Plugins menu.",
+    "changelog": "<h4>1.0.0</h4><ul><li>Initial release with dual animation systems</li><li>ID-based animation system with admin UI (13 types)</li><li>Class-based animation system for developers (20+ effects)</li><li>Accessibility support with prefers-reduced-motion detection</li><li>Conditional GSAP loading for performance</li><li>Parallax, fade, scale, rotation, and advanced animations</li><li>Professional automatic update system</li></ul>"
+  },
+  "upgrade_notice": "Initial release of GSAP Scroll Animations with dual animation systems and professional update support."
+}

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -Command \"Compress-Archive -Path ''../temp/gsap-scroll-animations/*'' -DestinationPath ''../temp/gsap-scroll-animations-1.0.0.zip'' -Force\")",
+      "Bash(powershell.exe -Command \"Get-Item ''gsap-scroll-animations-1.0.0.zip'' | Select-Object Name, Length, LastWriteTime | Format-List\")",
+      "Bash(powershell.exe -Command \"Add-Type -Assembly System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::OpenRead\\(''gsap-scroll-animations-1.0.0.zip''\\).Entries | Select-Object FullName | Format-Table -AutoSize\")",
+      "Bash(powershell.exe -Command \"Compress-Archive -Path ''../temp/gsap-scroll-animations/*'' -DestinationPath ''gsap-scroll-animations-1.0.0.zip'' -Force\")",
+      "Bash(powershell.exe -Command \"Add-Type -Assembly System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::OpenRead\\(''gsap-scroll-animations-1.0.0.zip''\\).Entries | Select-Object -First 10 FullName | Format-Table -AutoSize\")",
+      "Bash(ls:*)",
+      "Bash(powershell.exe -Command \"Add-Type -Assembly System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::OpenRead\\(''gsap-scroll-animations.zip''\\).Entries | Select-Object -First 8 FullName | Format-Table -AutoSize\")",
+      "Bash(python:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

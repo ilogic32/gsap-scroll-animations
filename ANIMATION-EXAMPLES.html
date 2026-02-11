@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Scroll Animations - All Animation Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            background: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .examples {
+            padding: 20px;
+        }
+
+        .example {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .example-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .example-code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .example-description {
+            margin: 10px 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .code-inline {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .attributes {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+
+        .attributes strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #667eea;
+        }
+
+        .attribute-list {
+            padding-left: 20px;
+        }
+
+        .attribute-list li {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .demo-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 15px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .id-based .example-code {
+            background: #fff8e6;
+            color: #333;
+            border: 1px solid #ffe082;
+        }
+
+        .class-based .example-code {
+            background: #e8f5e9;
+            color: #333;
+            border: 1px solid #81c784;
+        }
+
+        .note {
+            background: #fffde7;
+            border-left: 4px solid #fbc02d;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .example {
+                padding: 15px;
+            }
+
+            .example-code {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🎨 GSAP Scroll Animations</h1>
+    <p>Complete Reference Guide - All Animation Options & Examples</p>
+</div>
+
+<div class="container">
+
+    <!-- INFO SECTION -->
+    <div class="section">
+        <div class="section-title">📖 How to Use This Guide</div>
+        <div class="examples">
+            <p>This guide shows all available animations in the GSAP Scroll Animations WordPress plugin. Each animation has:</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Description</strong> - What the animation does</li>
+                <li><strong>Code Example</strong> - How to implement it</li>
+                <li><strong>Data Attributes</strong> - Customization options</li>
+                <li><strong>Live Demo</strong> - Visual preview</li>
+            </ul>
+
+            <div class="note">
+                <strong>💡 Tip:</strong> You can use these examples directly in your WordPress pages after enabling the class-based animation system in Settings → GSAP Animations
+            </div>
+
+            <div class="success">
+                <strong>✅ Ready to Use:</strong> Copy any example code directly into your page content. No additional setup needed!
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PARALLAX EFFECTS
+         ============================================ -->
+    <div class="section class-based">
+        <div class="section-title">🎯 Parallax Effects (3 Animations)</div>
+        <div class="examples">
+
+            <!-- Vertical Parallax -->
+            <div class="example">
+                <div class="example-title">1. Vertical Parallax</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element moves slower than scroll speed, creating depth effect</p>
+                <div class="example-code">
+&lt;!-- Vertical parallax (moves upward as you scroll down) --&gt;
+&lt;div class="gsap-parallax" data-speed="-5"&gt;
+    &lt;img src="background.jpg" alt="Parallax Background"&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-speed</span> - Speed multiplier (default: -5)</li>
+                        <li>Negative values move backward, positive move forward</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Scroll to see parallax effect ↓</div>
+            </div>
+
+            <!-- Horizontal Parallax -->
+            <div class="example">
+                <div class="example-title">2. Horizontal Parallax</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element moves horizontally as you scroll down</p>
+                <div class="example-code">
+&lt;!-- Horizontal parallax (moves left/right as you scroll) --&gt;
+&lt;div class="gsap-horizontal" data-hspeed="50"&gt;
+    &lt;img src="element.jpg" alt="Horizontal Movement"&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-hspeed</span> - Horizontal speed (default: 50)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Scroll to see horizontal movement ↓</div>
+            </div>
+
+            <!-- Diagonal Parallax -->
+            <div class="example">
+                <div class="example-title">3. Diagonal Movement</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Combined vertical and horizontal movement during scroll</p>
+                <div class="example-code">
+&lt;!-- Diagonal parallax (moves both X and Y) --&gt;
+&lt;div class="gsap-diagonal" data-speed="-5" data-hspeed="10"&gt;
+    &lt;img src="element.jpg" alt="Diagonal Movement"&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-speed</span> - Vertical speed (default: -5)</li>
+                        <li><span class="code-inline">data-hspeed</span> - Horizontal speed (default: 5)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Scroll to see diagonal movement ↓</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         FADE ANIMATIONS
+         ============================================ -->
+    <div class="section class-based">
+        <div class="section-title">✨ Fade Animations (5 Animations)</div>
+        <div class="examples">
+
+            <!-- Simple Fade -->
+            <div class="example">
+                <div class="example-title">1. Simple Fade</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element fades in when scrolled into view</p>
+                <div class="example-code">
+&lt;!-- Simple fade (opacity only, no movement) --&gt;
+&lt;div class="gsap-fade" data-duration="1.5" data-delay="0"&gt;
+    Content fades in smoothly
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-duration</span> - Animation duration in seconds (default: 1.5)</li>
+                        <li><span class="code-inline">data-delay</span> - Delay before animation starts (default: 0)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Fades in from initial opacity: 0 ↓</div>
+            </div>
+
+            <!-- Fade Up -->
+            <div class="example">
+                <div class="example-title">2. Fade From Bottom (Fade Up)</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element fades in while moving upward</p>
+                <div class="example-code">
+&lt;!-- Fade from bottom (moves up as it fades in) --&gt;
+&lt;div class="gsap-fade-up" data-distance="100" data-duration="1.2" data-delay="0.3"&gt;
+    Content fades in from below
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-distance</span> - Movement distance in pixels (default: 60)</li>
+                        <li><span class="code-inline">data-duration</span> - Animation duration in seconds (default: 1)</li>
+                        <li><span class="code-inline">data-delay</span> - Delay before animation starts (default: 0)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Slides up 100px while fading in ↓</div>
+            </div>
+
+            <!-- Fade Down -->
+            <div class="example">
+                <div class="example-title">3. Fade From Top (Fade Down)</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element fades in while moving downward</p>
+                <div class="example-code">
+&lt;!-- Fade from top (moves down as it fades in) --&gt;
+&lt;div class="gsap-fade-down" data-distance="80"&gt;
+    Content fades in from above
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-distance</span> - Movement distance in pixels (default: 60)</li>
+                        <li><span class="code-inline">data-duration</span> - Animation duration in seconds (default: 1)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Slides down while fading in ↓</div>
+            </div>
+
+            <!-- Fade Left -->
+            <div class="example">
+                <div class="example-title">4. Fade From Right (Fade Left)</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element fades in while moving from right to left</p>
+                <div class="example-code">
+&lt;!-- Fade from right (moves left as it fades in) --&gt;
+&lt;div class="gsap-fade-left" data-distance="100"&gt;
+    Content fades in from the right
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-distance</span> - Movement distance in pixels (default: 60)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Slides left while fading in ↓</div>
+            </div>
+
+            <!-- Fade Right -->
+            <div class="example">
+                <div class="example-title">5. Fade From Left (Fade Right)</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element fades in while moving from left to right</p>
+                <div class="example-code">
+&lt;!-- Fade from left (moves right as it fades in) --&gt;
+&lt;div class="gsap-fade-right" data-distance="100"&gt;
+    Content fades in from the left
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-distance</span> - Movement distance in pixels (default: 60)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Slides right while fading in ↓</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCALE & ZOOM EFFECTS
+         ============================================ -->
+    <div class="section class-based">
+        <div class="section-title">🔍 Scale & Zoom Effects (2 Animations)</div>
+        <div class="examples">
+
+            <!-- Scale In -->
+            <div class="example">
+                <div class="example-title">1. Scale In</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element grows from smaller size as it fades in</p>
+                <div class="example-code">
+&lt;!-- Scale from small to full size --&gt;
+&lt;div class="gsap-scale" data-scale="0.8" data-duration="1"&gt;
+    Content scales up while fading in
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-scale</span> - Starting scale (0.8 = 80%, default: 0.8)</li>
+                        <li><span class="code-inline">data-duration</span> - Animation duration in seconds (default: 1)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Grows from 80% to 100% size ↓</div>
+            </div>
+
+            <!-- Zoom -->
+            <div class="example">
+                <div class="example-title">2. Zoom On Scroll</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element continuously zooms as you scroll past it</p>
+                <div class="example-code">
+&lt;!-- Zooms continuously while scrolling --&gt;
+&lt;div class="gsap-zoom" data-scale="1.2"&gt;
+    &lt;img src="zoomable-image.jpg" alt="Zoom Effect"&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-scale</span> - Final scale size (1.2 = 120%, default: 1.2)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Zooms in continuously as you scroll ↓</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         ROTATION & FLIP
+         ============================================ -->
+    <div class="section class-based">
+        <div class="section-title">🔄 Rotation & Flip (2 Animations)</div>
+        <div class="examples">
+
+            <!-- Rotate -->
+            <div class="example">
+                <div class="example-title">1. Rotate On Scroll</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element rotates continuously as you scroll past it</p>
+                <div class="example-code">
+&lt;!-- Rotates as you scroll --&gt;
+&lt;div class="gsap-rotate" data-rotate="360"&gt;
+    &lt;img src="rotating-image.jpg" alt="Rotate Effect"&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-rotate</span> - Rotation degrees (360 = full turn, default: 360)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Rotates 360 degrees ↓</div>
+            </div>
+
+            <!-- Flip -->
+            <div class="example">
+                <div class="example-title">2. 3D Flip</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element flips in 3D space when scrolled into view</p>
+                <div class="example-code">
+&lt;!-- 3D flip animation on scroll --&gt;
+&lt;div class="gsap-flip" data-flip="90" data-duration="1.2"&gt;
+    Content flips in 3D space
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-flip</span> - Flip angle in degrees (default: 90)</li>
+                        <li><span class="code-inline">data-duration</span> - Animation duration in seconds (default: 1.2)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Flips 90 degrees in 3D ↓</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         PINNING & STICKY
+         ============================================ -->
+    <div class="section class-based">
+        <div class="section-title">📌 Pinning & Sticky (2 Animations)</div>
+        <div class="examples">
+
+            <!-- Pin -->
+            <div class="example">
+                <div class="example-title">1. Pin Section</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element stays fixed in viewport while you scroll past it</p>
+                <div class="example-code">
+&lt;!-- Section pins to viewport during scroll --&gt;
+&lt;div class="gsap-pin" data-pinstart="top top" data-pinend="bottom top"&gt;
+    &lt;h2&gt;This section pins in place&lt;/h2&gt;
+    &lt;p&gt;Keep scrolling - this stays visible!&lt;/p&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-pinstart</span> - Pin trigger start (default: "top top")</li>
+                        <li><span class="code-inline">data-pinend</span> - Pin trigger end (default: "bottom top")</li>
+                        <li><span class="code-inline">data-pinspacing</span> - Add spacing after pin (default: true)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Stays in viewport while scrolling ↓</div>
+            </div>
+
+            <!-- Sticky Fade -->
+            <div class="example">
+                <div class="example-title">2. Sticky With Fade Out</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element stays sticky then fades out as you scroll past</p>
+                <div class="example-code">
+&lt;!-- Sticky element that fades as you scroll past --&gt;
+&lt;div class="gsap-sticky-fade"&gt;
+    &lt;h2&gt;Sticky header&lt;/h2&gt;
+    &lt;p&gt;Scrolling past this will fade it out&lt;/p&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li>No additional data attributes needed</li>
+                        <li>Automatically fades opacity based on scroll progress</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Fades as you scroll past ↓</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         ADVANCED EFFECTS
+         ============================================ -->
+    <div class="section class-based">
+        <div class="section-title">⚡ Advanced Effects (7 Animations)</div>
+        <div class="examples">
+
+            <!-- Stagger -->
+            <div class="example">
+                <div class="example-title">1. Stagger Animation</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Children elements animate one after another with delay</p>
+                <div class="example-code">
+&lt;!-- Stagger animates children sequentially --&gt;
+&lt;div class="gsap-stagger" data-stagger="0.2" data-distance="30"&gt;
+    &lt;p&gt;First item&lt;/p&gt;
+    &lt;p&gt;Second item&lt;/p&gt;
+    &lt;p&gt;Third item&lt;/p&gt;
+    &lt;p&gt;Fourth item&lt;/p&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-stagger</span> - Delay between children (default: 0.1)</li>
+                        <li><span class="code-inline">data-distance</span> - Movement distance (default: 30)</li>
+                        <li><span class="code-inline">data-duration</span> - Animation duration (default: 0.6)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Items appear one by one ↓</div>
+            </div>
+
+            <!-- Text Reveal -->
+            <div class="example">
+                <div class="example-title">2. Text Reveal</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Text lines reveal one at a time when scrolled into view</p>
+                <div class="example-code">
+&lt;!-- Text reveals line by line --&gt;
+&lt;div class="gsap-text-reveal"&gt;
+    &lt;h3&gt;This text reveals line by line&lt;/h3&gt;
+    &lt;p&gt;Each paragraph animates separately&lt;/p&gt;
+    &lt;p&gt;Creating an engaging entrance effect&lt;/p&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li>Automatically reveals all <span class="code-inline">p</span>, <span class="code-inline">h1-h6</span> tags</li>
+                        <li><span class="code-inline">data-duration</span> - Line animation duration (default: 0.8)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Text reveals line by line ↓</div>
+            </div>
+
+            <!-- Counter -->
+            <div class="example">
+                <div class="example-title">3. Animated Counter</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Number counts up from 0 to target when scrolled into view</p>
+                <div class="example-code">
+&lt;!-- Animated counter from 0 to target --&gt;
+&lt;div class="gsap-counter" data-target="500" data-duration="2"&gt;0&lt;/div&gt;
+&lt;p&gt;Customers Served&lt;/p&gt;
+
+&lt;!-- Another counter with longer duration --&gt;
+&lt;div class="gsap-counter" data-target="1000000" data-duration="3"&gt;0&lt;/div&gt;
+&lt;p&gt;Total Revenue&lt;/p&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-target</span> - Final number to count to (default: 100)</li>
+                        <li><span class="code-inline">data-duration</span> - Count duration in seconds (default: 2)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Counts up to target number ↓</div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="example">
+                <div class="example-title">4. Progress Bar Fill</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Progress bar animates from 0% to target width</p>
+                <div class="example-code">
+&lt;!-- Progress bar that fills on scroll --&gt;
+&lt;div style="background: #e0e0e0; height: 20px; border-radius: 10px; overflow: hidden;"&gt;
+    &lt;div class="gsap-progress" data-percent="75" data-duration="1.5"
+         style="background: #667eea; height: 100%; width: 0%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Project Completion: 75%&lt;/p&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li><span class="code-inline">data-percent</span> - Target width percentage (default: 100)</li>
+                        <li><span class="code-inline">data-duration</span> - Animation duration (default: 1.5)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Progress bar fills on scroll ↓</div>
+            </div>
+
+            <!-- Skew -->
+            <div class="example">
+                <div class="example-title">5. Skew On Scroll</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element skews based on scroll velocity</p>
+                <div class="example-code">
+&lt;!-- Skew effect based on scroll speed --&gt;
+&lt;div class="gsap-skew"&gt;
+    &lt;img src="element.jpg" alt="Skew Effect"&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li>No data attributes needed</li>
+                        <li>Automatically responds to scroll velocity</li>
+                        <li>Clamps between -20 and 20 degrees</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Skews based on scroll speed ↓</div>
+            </div>
+
+            <!-- Blur -->
+            <div class="example">
+                <div class="example-title">6. Blur On Scroll</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Element becomes blurred as you scroll past it</p>
+                <div class="example-code">
+&lt;!-- Blurs while scrolling --&gt;
+&lt;div class="gsap-blur"&gt;
+    &lt;img src="blurry-element.jpg" alt="Blur Effect"&gt;
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Data Attributes:</strong>
+                    <ul class="attribute-list">
+                        <li>No data attributes needed</li>
+                        <li>Automatically applies blur filter (0-10px)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Blurs as you scroll past ↓</div>
+            </div>
+
+            <!-- Mobile Disable -->
+            <div class="example">
+                <div class="example-title">7. Mobile Disable</div>
+                <span class="tag">class-based</span>
+                <p class="example-description">Disables animation on mobile devices (≤768px)</p>
+                <div class="example-code">
+&lt;!-- Add this class to prevent animation on mobile --&gt;
+&lt;div class="gsap-fade-up gsap-mobile-disable"&gt;
+    This animation only plays on desktop
+&lt;/div&gt;
+
+&lt;!-- Works with any animation class --&gt;
+&lt;div class="gsap-parallax gsap-mobile-disable" data-speed="-5"&gt;
+    Parallax disabled on mobile
+&lt;/div&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Usage:</strong>
+                    <ul class="attribute-list">
+                        <li>Add <span class="code-inline">gsap-mobile-disable</span> to any animation class</li>
+                        <li>Automatically detects screens ≤768px width</li>
+                        <li>Animation still works on desktop</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Disabled on screens ≤768px ↓</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         ID-BASED ANIMATIONS
+         ============================================ -->
+    <div class="section id-based">
+        <div class="section-title">🆔 ID-Based Animations (5 Animations)</div>
+        <div class="examples">
+
+            <div class="note">
+                <strong>📌 ID-Based System:</strong> Configure these animations via WordPress Admin (Settings → GSAP Animations). No code needed!
+            </div>
+
+            <!-- Fade In -->
+            <div class="example">
+                <div class="example-title">1. Fade In</div>
+                <span class="tag">id-based</span>
+                <p class="example-description">Element fades in smoothly when scrolled into view</p>
+                <div class="example-code">
+&lt;!-- HTML: Add unique ID to element --&gt;
+&lt;div id="fade-element"&gt;
+    This element fades in when you scroll to it
+&lt;/div&gt;
+
+&lt;!-- ADMIN SETUP: --&gt;
+&lt;!-- Settings → GSAP Animations --&gt;
+&lt;!-- ID: fade-element --&gt;
+&lt;!-- Type: Fade In --&gt;
+&lt;!-- Duration: 1.0 --&gt;
+&lt;!-- Delay: 0 --&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Customizable via Admin:</strong>
+                    <ul class="attribute-list">
+                        <li>Duration (seconds)</li>
+                        <li>Delay (seconds)</li>
+                        <li>Easing (power1.out, elastic.out, etc.)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Fade In Animation</div>
+            </div>
+
+            <!-- Slide Up -->
+            <div class="example">
+                <div class="example-title">2. Slide Up</div>
+                <span class="tag">id-based</span>
+                <p class="example-description">Element slides up while fading in</p>
+                <div class="example-code">
+&lt;!-- HTML: Add unique ID --&gt;
+&lt;div id="slide-up-element"&gt;
+    Slides up and fades in
+&lt;/div&gt;
+
+&lt;!-- ADMIN SETUP: --&gt;
+&lt;!-- Settings → GSAP Animations --&gt;
+&lt;!-- ID: slide-up-element --&gt;
+&lt;!-- Type: Slide Up --&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Default Movement:</strong>
+                    <ul class="attribute-list">
+                        <li>Y Movement: 100px downward → 0 (slides up)</li>
+                        <li>Opacity: 0 → 1 (fades in)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Slide Up Animation</div>
+            </div>
+
+            <!-- Slide Left -->
+            <div class="example">
+                <div class="example-title">3. Slide Left</div>
+                <span class="tag">id-based</span>
+                <p class="example-description">Element slides left while fading in</p>
+                <div class="example-code">
+&lt;!-- HTML: Add unique ID --&gt;
+&lt;div id="slide-left-element"&gt;
+    Slides left and fades in
+&lt;/div&gt;
+
+&lt;!-- ADMIN SETUP: --&gt;
+&lt;!-- Settings → GSAP Animations --&gt;
+&lt;!-- ID: slide-left-element --&gt;
+&lt;!-- Type: Slide Left --&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Default Movement:</strong>
+                    <ul class="attribute-list">
+                        <li>X Movement: 100px rightward → 0 (slides left)</li>
+                        <li>Opacity: 0 → 1 (fades in)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Slide Left Animation</div>
+            </div>
+
+            <!-- Slide Right -->
+            <div class="example">
+                <div class="example-title">4. Slide Right</div>
+                <span class="tag">id-based</span>
+                <p class="example-description">Element slides right while fading in</p>
+                <div class="example-code">
+&lt;!-- HTML: Add unique ID --&gt;
+&lt;div id="slide-right-element"&gt;
+    Slides right and fades in
+&lt;/div&gt;
+
+&lt;!-- ADMIN SETUP: --&gt;
+&lt;!-- Settings → GSAP Animations --&gt;
+&lt;!-- ID: slide-right-element --&gt;
+&lt;!-- Type: Slide Right --&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Default Movement:</strong>
+                    <ul class="attribute-list">
+                        <li>X Movement: -100px leftward → 0 (slides right)</li>
+                        <li>Opacity: 0 → 1 (fades in)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Slide Right Animation</div>
+            </div>
+
+            <!-- Scale In -->
+            <div class="example">
+                <div class="example-title">5. Scale In</div>
+                <span class="tag">id-based</span>
+                <p class="example-description">Element scales up from smaller size while fading in</p>
+                <div class="example-code">
+&lt;!-- HTML: Add unique ID --&gt;
+&lt;div id="scale-element"&gt;
+    Scales up and fades in
+&lt;/div&gt;
+
+&lt;!-- ADMIN SETUP: --&gt;
+&lt;!-- Settings → GSAP Animations --&gt;
+&lt;!-- ID: scale-element --&gt;
+&lt;!-- Type: Scale In --&gt;
+                </div>
+                <div class="attributes">
+                    <strong>Default Movement:</strong>
+                    <ul class="attribute-list">
+                        <li>Scale: 0.8 (80%) → 1.0 (100%)</li>
+                        <li>Opacity: 0 → 1 (fades in)</li>
+                    </ul>
+                </div>
+                <div class="demo-box">Scale In Animation</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         COMMON DATA ATTRIBUTES REFERENCE
+         ============================================ -->
+    <div class="section">
+        <div class="section-title">📚 Common Data Attributes Reference</div>
+        <div class="examples">
+
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #f9f9f9; border-bottom: 2px solid #ddd;">
+                        <th style="padding: 10px; text-align: left;">Attribute</th>
+                        <th style="padding: 10px; text-align: left;">Purpose</th>
+                        <th style="padding: 10px; text-align: left;">Example</th>
+                        <th style="padding: 10px; text-align: left;">Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-duration</span></td>
+                        <td style="padding: 10px;">Animation time in seconds</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-duration="1.5"</span></td>
+                        <td style="padding: 10px;">1-1.5</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-delay</span></td>
+                        <td style="padding: 10px;">Wait before animation starts</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-delay="0.3"</span></td>
+                        <td style="padding: 10px;">0</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-distance</span></td>
+                        <td style="padding: 10px;">Movement distance in pixels</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-distance="100"</span></td>
+                        <td style="padding: 10px;">30-60</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-speed</span></td>
+                        <td style="padding: 10px;">Parallax speed multiplier</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-speed="-5"</span></td>
+                        <td style="padding: 10px;">-5</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-scale</span></td>
+                        <td style="padding: 10px;">Scale/zoom factor</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-scale="0.8"</span></td>
+                        <td style="padding: 10px;">0.8-1.2</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-rotate</span></td>
+                        <td style="padding: 10px;">Rotation in degrees</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-rotate="360"</span></td>
+                        <td style="padding: 10px;">360</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-stagger</span></td>
+                        <td style="padding: 10px;">Delay between children</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-stagger="0.2"</span></td>
+                        <td style="padding: 10px;">0.1</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 10px;"><span class="code-inline">data-target</span></td>
+                        <td style="padding: 10px;">Counter final number</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-target="500"</span></td>
+                        <td style="padding: 10px;">100</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;"><span class="code-inline">data-percent</span></td>
+                        <td style="padding: 10px;">Progress bar percentage</td>
+                        <td style="padding: 10px;"><span class="code-inline">data-percent="75"</span></td>
+                        <td style="padding: 10px;">100</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         TIPS & BEST PRACTICES
+         ============================================ -->
+    <div class="section">
+        <div class="section-title">💡 Tips & Best Practices</div>
+        <div class="examples">
+
+            <div class="success">
+                <strong>✅ Use Meaningful IDs for ID-Based:</strong>
+                <p>Use descriptive IDs like <span class="code-inline">hero-section</span>, <span class="code-inline">testimonial-box</span> instead of <span class="code-inline">item1</span>, <span class="code-inline">item2</span></p>
+            </div>
+
+            <div class="success">
+                <strong>✅ Combine Multiple Classes:</strong>
+                <p>You can combine a class-based animation with <span class="code-inline">gsap-mobile-disable</span> to disable on mobile: <span class="code-inline">&lt;div class="gsap-fade-up gsap-mobile-disable"&gt;</span></p>
+            </div>
+
+            <div class="success">
+                <strong>✅ Use Data Attributes for Customization:</strong>
+                <p>Always use data attributes to customize: <span class="code-inline">data-duration</span>, <span class="code-inline">data-delay</span>, <span class="code-inline">data-distance</span></p>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Avoid Excessive Animations:</strong>
+                <p>Don't animate everything! Too many animations can distract and harm performance. Use animations to highlight important content.</p>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Test on Mobile:</strong>
+                <p>Always test your animations on actual mobile devices or use DevTools emulation. Some effects may not look good on small screens.</p>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Keep Accessibility in Mind:</strong>
+                <p>The plugin automatically respects <span class="code-inline">prefers-reduced-motion</span>, so users with motion sensitivity won't see animations.</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>GSAP Scroll Animations - Complete Animation Reference Guide</p>
+    <p>For more information, visit Settings → GSAP Animations in WordPress Admin</p>
+    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Powered by GSAP 3.12.5 & ScrollTrigger | Built for WordPress</p>
+</div>
+
+</body>
+</html>

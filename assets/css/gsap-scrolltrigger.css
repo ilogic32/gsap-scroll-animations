@@ -1,0 +1,180 @@
+/* GSAP Performance Optimizations */
+.gsap-parallax {
+	will-change: transform;
+}
+
+/* GSAP Fade Effects */
+.gsap-fade,
+.gsap-fade-up,
+.gsap-fade-down,
+.gsap-fade-left,
+.gsap-fade-right,
+.gsap-scale {
+	opacity: 0;
+}
+
+/* GSAP Transform Effects */
+.gsap-horizontal {
+	will-change: transform;
+}
+
+.gsap-pin {
+	position: relative;
+}
+
+/* GSAP Hero Section */
+.gsap-hero {
+	min-height: 100vh;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.gsap-hero-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 120%;
+	object-fit: cover;
+	z-index: -1;
+}
+
+/* GSAP Section Styling */
+.gsap-section {
+	position: relative;
+	overflow: hidden;
+	padding: 100px 0;
+}
+
+/* GSAP Animation Classes */
+.gsap-float {
+	position: absolute;
+	pointer-events: none;
+}
+
+.gsap-stagger > * {
+	opacity: 0;
+}
+
+.gsap-text-reveal {
+	overflow: hidden;
+}
+
+.gsap-text-reveal > * {
+	transform: translateY(100%);
+}
+
+.gsap-rotate,
+.gsap-morph,
+.gsap-scrub,
+.gsap-diagonal {
+	will-change: transform;
+}
+
+.gsap-timeline {
+	position: relative;
+}
+
+/* GSAP Z-Index Layers */
+.gsap-layer-back {
+	z-index: -2;
+}
+
+.gsap-layer-mid {
+	z-index: -1;
+}
+
+.gsap-layer-front {
+	z-index: 1;
+}
+
+.gsap-layer-top {
+	z-index: 10;
+}
+
+/* GSAP Mobile Responsiveness */
+@media (max-width: 768px) {
+	.gsap-mobile-disable {
+		transform: none !important;
+	}
+
+	.gsap-mobile-hide {
+		display: none;
+	}
+}
+
+/* GSAP Text Scroll Effects */
+.gsap-text-scroll {
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.gsap-text-scroll-inner {
+	display: inline-block;
+	will-change: transform;
+}
+
+.gsap-text-marquee {
+	overflow: hidden;
+}
+
+.gsap-text-marquee-inner {
+	display: flex;
+	will-change: transform;
+}
+
+/* GSAP Typewriter Effect */
+.gsap-typewriter {
+	border-right: 2px solid currentColor;
+	animation: blink 1s infinite;
+}
+
+@keyframes blink {
+	0%, 50% {
+		border-color: transparent;
+	}
+	51%, 100% {
+		border-color: currentColor;
+	}
+}
+
+.gsap-text-scrub {
+	will-change: transform;
+	white-space: nowrap;
+}
+
+/* GSAP 3D Flip Card Effects */
+.gsap-flip,
+.gsap-flip-x,
+.gsap-flip-y {
+	will-change: transform;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+}
+
+/* GSAP Counter Effects */
+.gsap-counter {
+}
+
+/* GSAP Progress Bar Structure */
+.progress-bar {
+	width: 100%;
+	height: 20px;
+	background-color: #e0e0e0;
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+}
+
+.progress-fill {
+	height: 100%;
+	width: 0%; /* Start at 0 for animation */
+	position: relative;
+}
+
+.gsap-progress {
+	width: 0%; /* GSAP animation control */
+}
