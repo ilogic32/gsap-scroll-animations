@@ -867,14 +867,21 @@ class GSAP_Scroll_Animations {
                     <button type="button" id="add-row" class="button">+ Add Row</button>
                 </p>
 
+                <p class="submit" style="margin-top: 20px;">
+                    <input type="submit" name="gsap_animations_submit" class="button button-primary" value="Save Settings">
+                </p>
+
 
                 <!-- HTML ID Usage Guide -->
-                <div style="background: #ffffff; border: 2px solid #353f6d; border-radius: 8px; margin-top: 40px; overflow: hidden;">
-                    <!-- Header -->
-                    <div style="background: #353f6d; color: white; padding: 25px 30px;">
-                        <h2 style="margin: 0; color: white; font-size: 24px; font-weight: 600;">How to Use HTML ID Animations</h2>
-                        <p style="margin: 10px 0 0 0; color: #ffffff; opacity: 0.95; font-size: 14px;">Simple, beginner-friendly guide to adding scroll animations</p>
-                    </div>
+                <details style="background: #ffffff; border: 2px solid #353f6d; border-radius: 8px; margin-top: 40px; overflow: hidden;">
+                    <summary style="cursor: pointer; list-style: none;">
+                        <!-- Header -->
+                        <div style="background: #353f6d; color: white; padding: 25px 30px; position: relative;">
+                            <h2 style="margin: 0; color: white; font-size: 24px; font-weight: 600; display: inline-block;">How to Use HTML ID Animations</h2>
+                            <span class="gsap-guide-toggle" style="position: absolute; right: 30px; top: 50%; transform: translateY(-50%); font-size: 20px; transition: transform 0.3s ease;">▼</span>
+                            <p style="margin: 10px 0 0 0; color: #ffffff; opacity: 0.95; font-size: 14px;">Simple, beginner-friendly guide to adding scroll animations</p>
+                        </div>
+                    </summary>
 
                     <!-- Content -->
                     <div style="padding: 30px;">
@@ -1024,7 +1031,7 @@ class GSAP_Scroll_Animations {
                             <a href="https://www.blu8print.com" target="_blank" style="color: #353f6d; text-decoration: none; font-weight: 600;">www.blu8print.com</a>
                         </p>
                     </div>
-                </div>
+                </details>
 
                 <p class="submit">
                     <input type="submit" name="gsap_animations_submit" class="button button-primary" value="Save Settings">
@@ -1044,6 +1051,37 @@ class GSAP_Scroll_Animations {
             }
             #add-row {
                 margin-top: 10px;
+            }
+
+            /* Hide default details marker */
+            details summary::-webkit-details-marker {
+                display: none;
+            }
+
+            /* Rotate arrow when expanded */
+            details[open] .gsap-guide-toggle {
+                transform: translateY(-50%) rotate(180deg);
+            }
+
+            /* Interactive states */
+            details summary {
+                cursor: pointer;
+                outline: none;
+            }
+
+            details summary:hover {
+                opacity: 0.9;
+                transition: opacity 0.2s ease;
+            }
+
+            details summary:focus {
+                outline: 2px solid #353f6d;
+                outline-offset: 2px;
+            }
+
+            .gsap-guide-toggle {
+                transition: transform 0.3s ease;
+                display: inline-block;
             }
         </style>
         
